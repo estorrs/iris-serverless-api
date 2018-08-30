@@ -1,0 +1,9 @@
+.env
+*.pyc
+
+bin/
+lib/
+pip-selfcheck.json
+pyvenv.cfg
+
+.serverless/*
