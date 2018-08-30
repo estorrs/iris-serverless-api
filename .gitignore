@@ -2,8 +2,11 @@
 *.pyc
 
 bin/
+etc/
 lib/
+share/
 pip-selfcheck.json
 pyvenv.cfg
 
+.ipynb_checkpoints/
 .serverless/*
