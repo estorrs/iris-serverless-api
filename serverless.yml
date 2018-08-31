@@ -1,0 +1,40 @@
+service: serverless-iris-api # our service name
+
+
+# here we include some of our provider details
+provider:
+  name: aws
+  stage: ${opt:stage, 'dev'} # stage is dev unless otherwise specified with --stage flag
+  runtime: python3.6
+  region: us-east-1
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
+
+package:
+  exclude:
+    - bin/**
+    - lib/**
+    - share/**
+    - model.ipynb
+
+# here we define what lambda functions we want
+functions:
+  iris-status: # our lambda function name
+    handler: handler.status # the function we want invoked
+    events:
+      - http:
+          path: status
+          method: get
+          cors: true
+  iris-predict:
+    handler: handler.predict
+    events:
+      - http:
+          path: predict
+          method: post
+          cors: true
