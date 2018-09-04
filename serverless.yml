@@ -1,6 +1,5 @@
 service: serverless-iris-api # our service name
 
-
 # here we include some of our provider details
 provider:
   name: aws
@@ -8,27 +7,32 @@ provider:
   runtime: python3.6
   region: us-east-1
 
+# tell serverless we want to use the serverless-python-requirements plugin
 plugins:
-  - serverless-python-requirements
+  - serverless-python-requirements # helps package our python requirements
 
+# serverless python requirements plugin requires you to set some variables
 custom:
   pythonRequirements:
-    dockerizePip: non-linux
+    dockerizePip: non-linux # instructs the python requirments plugin to use a docker container to package requirements
 
+# here we explicitly define what files from our directory get deployed
+# we exclude everything and then add back in the files we need
 package:
   exclude:
-    - bin/**
-    - lib/**
-    - share/**
-    - model.ipynb
+    - ./**
+  include:
+    - handler.py
+    - model/**
+    - requirements.txt
 
 # here we define what lambda functions we want
 functions:
-  iris-status: # our lambda function name
-    handler: handler.status # the function we want invoked
+  iris-status: # name of the lambda function we want invoked
+    handler: handler.status # the location of the function we want invoked
     events:
       - http:
-          path: status
+          path: status # api gateway path we want associated with the lambda function
           method: get
           cors: true
   iris-predict:
