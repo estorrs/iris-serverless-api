@@ -10,3 +10,8 @@ pyvenv.cfg
 
 .ipynb_checkpoints/
 .serverless/*
+state.json
+
+node_modules/
+package-lock.json
+package.json
