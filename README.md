@@ -1,1 +1,1 @@
-# iris-serverless-api
+An example python api with Python and Serverless Framework
